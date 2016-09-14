@@ -2258,6 +2258,8 @@ scrollbar {
 
   // slider
   slider {
+    transition: $button_transition;
+    transition-property: min-height, min-width, border-color, background-color;
     min-width: 6px;
     min-height: 6px;
     margin: -1px;
@@ -2277,12 +2279,13 @@ scrollbar {
 
   &.fine-tune {
     slider {
+      transition: none;
       min-width: 4px;
       min-height: 4px;
     }
 
-    &.horizontal slider { border-width: 5px 4px; }
-    &.vertical slider { border-width: 4px 5px; }
+    &.horizontal slider { margin: 0 -1px; }
+    &.vertical slider { margin: -1px 0; }
   }
 
   &.overlay-indicator {
@@ -2292,16 +2295,17 @@ scrollbar {
       background-color: transparent;
 
       slider {
-        margin: 0;
-        min-width: 3px;
-        min-height: 3px;
+        margin: 2px;
+        min-width: 4px;
+        min-height: 4px;
         background-color: $fg_color;
         border: 1px solid if($variant == 'light', white, black);
       }
 
       button {
-        min-width: 5px;
-        min-height: 5px;
+        margin: 2px;
+        min-width: 4px;
+        min-height: 4px;
         background-color: $fg_color;
         background-clip: padding-box;
         border-radius: 100%;
@@ -2310,27 +2314,15 @@ scrollbar {
       }
 
       &.horizontal {
-        slider {
-          margin: 0 2px;
-          min-width: $_slider_min_length;
-        }
+        slider { min-width: $_slider_min_length; }
 
-        button {
-          margin: 1px 2px;
-          min-width: 5px;
-        }
+        button { min-width: 6px; }
       }
 
       &.vertical {
-        slider {
-          margin: 2px 0;
-          min-height: $_slider_min_length;
-        }
+        slider { min-height: $_slider_min_length; }
 
-        button {
-          margin: 2px 1px;
-          min-height: 5px;
-        }
+        button { min-height: 6px; }
       }
     }
 
