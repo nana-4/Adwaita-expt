@@ -541,13 +541,13 @@ button {
     color: $osd_fg_color;
     border-radius: 5px;
 
-    @include button(osd);
+    @include button(normal, $osd_bg_color, $osd_fg_color);
 
     border: none;
     box-shadow: none;
 
     &:hover {
-      @include button(osd-hover);
+      @include button(hover, $osd_bg_color, $osd_fg_color);
 
       border: none;
       box-shadow: none;
@@ -555,7 +555,7 @@ button {
 
     &:active,
     &:checked {
-      @include button(osd-active);
+      @include button(active, $osd_bg_color, $osd_fg_color);
 
       border: none;
       box-shadow: none;
@@ -563,14 +563,14 @@ button {
 
     &:disabled {
       &:backdrop, & {
-        @include button(osd-insensitive);
+        @include button(insensitive, $osd_bg_color, $osd_fg_color);
 
         border: none;
       }
     }
 
     &:backdrop {
-      @include button(osd-backdrop);
+      @include button(backdrop, $osd_bg_color, $osd_fg_color);
 
       border: none;
     }
@@ -579,28 +579,28 @@ button {
   //overlay / OSD style
   @at-root %osd_button,
   .osd & {
-    @include button(osd);
+    @include button(normal, $osd_bg_color, $osd_fg_color);
 
-    &:hover { @include button(osd-hover); }
+    &:hover { @include button(hover, $osd_bg_color, $osd_fg_color); }
 
     &:active,
-    &:checked { &:backdrop, & { @include button(osd-active); }}
+    &:checked { @include button(active, $osd_bg_color, $osd_fg_color); }
 
-    &:disabled { &:backdrop, & { @include button(osd-insensitive); }}
+    &:disabled { @include button(insensitive, $osd_bg_color, $osd_fg_color); }
 
-    &:backdrop { @include button(osd-backdrop); }
+    &:backdrop { @include button(backdrop, $osd_bg_color, $osd_fg_color); }
 
     &.flat {
-      @include button(undecorated);
+      @include button(undecorated, $osd_bg_color, $osd_fg_color);
 
       box-shadow: none; //FIXME respect no edge on the button mixin
       text-shadow: 0 1px black;
       -gtk-icon-shadow: 0 1px black;
 
-      &:hover { @include button(osd-hover); }
+      &:hover { @include button(hover, $osd_bg_color, $osd_fg_color); }
 
       &:disabled {
-        @include button(osd-insensitive);
+        @include button(insensitive, $osd_bg_color, $osd_fg_color);
         background-image: none;
         border-color: transparent;
         box-shadow: none;
@@ -609,7 +609,7 @@ button {
       &:backdrop { @include button(undecorated); }
 
       &:active,
-      &:checked { @include button(osd-active); }
+      &:checked { @include button(active, $osd_bg_color, $osd_fg_color); }
     }
   }
 
@@ -661,16 +661,16 @@ button {
       }
 
       .osd & {
-        @include button(osd, $b_color);
+        @include button(normal, $b_color);
 
-        &:hover { @include button(osd-hover, $b_color); }
+        &:hover { @include button(hover, $b_color); }
 
         &:active,
-        &:checked { &:backdrop, & { @include button(osd-active, $b_color); }}
+        &:checked { &:backdrop, & { @include button(active, $b_color); }}
 
-        &:disabled { &:backdrop, & { @include button(osd-insensitive, $b_color); }}
+        &:disabled { &:backdrop, & { @include button(insensitive, $b_color); }}
 
-        &:backdrop { @include button(osd-backdrop, $b_color); }
+        &:backdrop { @include button(backdrop, $b_color); }
       }
     }
   }
@@ -1157,15 +1157,6 @@ spinbutton {
 
   // OSD vertical
   .osd &.vertical button:first-child {
-    @include button(osd);
-
-    &:hover { @include button(osd-hover);}
-
-    &:active { @include button(osd-active); }
-
-    &:disabled { @include button(osd-insensitive); }
-
-    &:backdrop { @include button(osd-backdrop); }
   }
 
   // Misc
@@ -1653,9 +1644,6 @@ treeview.view {
     border: 1px solid $selected_borders_color;
     border-radius: 4px;
     background-color: $selected_bg_color;
-    background-image: linear-gradient(to bottom,
-                                      $selected_bg_color,
-                                      darken($selected_bg_color, 10%));
     box-shadow: inset 0 1px if($variant=='light', transparentize(white, 0.7), transparentize(white, 0.85)),
                       0 1px if($variant=='light', transparentize(black, 0.8), transparentize(black, 0.9));
 
@@ -1670,7 +1658,7 @@ treeview.view {
 
         @else { box-shadow: inset 0 1px transparentize(white, 0.95); }
 
-        background-image: linear-gradient(to bottom, $base_color, darken($base_color,10%));
+        background-color: $base_color;
 
         &:backdrop {
           @if $variant == 'light' {
@@ -2550,12 +2538,12 @@ radio {
   }
 
   .osd & {
-    @include button(osd);
+    @include button(normal, $osd_bg_color, $osd_fg_color);
 
-    &:hover { @include button(osd); }
-    &:active { @include button(osd-active); }
-    &:backdrop { @include button(osd-backdrop); }
-    &:disabled { @include button(osd-insensitive); }
+    &:hover { @include button(hover, $osd_bg_color, $osd_fg_color); }
+    &:active { @include button(active, $osd_bg_color, $osd_fg_color); }
+    &:backdrop { @include button(backdrop, $osd_bg_color, $osd_fg_color); }
+    &:disabled { @include button(insensitive, $osd_bg_color, $osd_fg_color); }
   }
 
   menu menuitem & {
@@ -2814,32 +2802,25 @@ scale {
 
     // OSD
     .osd & {
-      @include button(osd);
-      border-color: darken($osd_borders_color, 3%);
-      background-color: opacify($osd_bg_color, 1); // solid background needed here
+      @include button(normal, opacify($osd_bg_color, 1), $osd_fg_color); // solid background needed here
 
       &:hover {
-        @include button(osd-hover);
-        background-color: opacify($osd_bg_color, 1); // solid background needed here
+        @include button(hover, opacify($osd_bg_color, 1), $osd_fg_color); // solid background needed here
       }
 
       &:active {
-        @include button(osd-active);
-        background-color: opacify($osd_bg_color, 1); // solid background needed here
+        border-color: $selected_borders_color;
       }
 
       &:disabled {
-        @include button(osd-insensitive);
-        background-color: opacify($osd_bg_color, 1); // solid background needed here
+        @include button(insensitive, opacify($osd_bg_color, 1), $osd_fg_color); // solid background needed here
       }
 
       &:backdrop {
-        @include button(osd-backdrop);
-        background-color: opacify($osd_bg_color, 1); // solid background needed here
+        @include button(backdrop, opacify($osd_bg_color, 1), $osd_fg_color); // solid background needed here
 
         &:disabled {
-          @include button(osd-backdrop-insensitive);
-          background-color: opacify($osd_bg_color, 1); // solid background needed here
+          @include button(backdrop-insensitive, opacify($osd_bg_color, 1), $osd_fg_color); // solid background needed here
         }
       }
     }
@@ -3330,15 +3311,15 @@ scrolledwindow {
   }
 
   junction { // the small square between two scrollbars
-    border-color: transparent;
-    // the border image is used to add the missing dot between the borders, details, details, details...
-    border-image: linear-gradient(to bottom, $borders_color 1px, transparent 1px) 0 0 0 1 / 0 1px stretch;
+    border-style: solid none none solid;
+    border-width: 1px;
+    border-color: $borders_color;
     background-color: $scrollbar_bg_color;
 
-    &:dir(rtl) { border-image-slice: 0 1 0 0; }
+    &:dir(rtl) { border-style: solid solid none none; }
 
     &:backdrop {
-      border-image-source: linear-gradient(to bottom, $backdrop_borders_color 1px, transparent 1px);
+      border-color: $backdrop_borders_color;
       background-color: $backdrop_scrollbar_bg_color;
       transition: $backdrop_transition;
     }
@@ -3409,12 +3390,9 @@ row {
   padding: 10px;
   border-radius: 0 0 5px 5px;
   background-color: $osd_bg_color;
-  background-image: linear-gradient(to bottom, transparentize(black, 0.8),
-                                               transparent 2px);
   background-clip: padding-box;
 
   &:backdrop {
-    background-image: none;
     transition: $backdrop_transition;
   }
 
@@ -3551,7 +3529,7 @@ filechooserbutton:drop(active) {
  ***********/
 .sidebar {
   border-style: none;
-  background-color: mix($bg_color, $base_color, 50%);
+  background-color: $sidebar_bg_color;
 
   @at-root %sidebar_left,
   &:dir(ltr),
