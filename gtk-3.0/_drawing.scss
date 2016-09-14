@@ -190,15 +190,21 @@
     color: $tc;
     border-color: if($c != $bg_color, _border_color($c), $borders_color);
     background-color: lighten($c, 2%);
-    @include _button_text_shadow($tc, $c);
     box-shadow: inset 0 1px $_hilight_color, inset 0 -1px $shadow_color;
+
+    @include _button_text_shadow($tc, $c);
   }
 
   @else if $t==hover {
+    border-color: if($c != $bg_color, _border_color($c), $borders_color);
     background-color: lighten($c, 6%);
+    box-shadow: inset 0 1px $_hilight_color, inset 0 -1px $shadow_color;
+
+    @include _button_text_shadow($tc, $c);
   }
 
   @else if $t==active {
+    border-color: if($c != $bg_color, _border_color($c), $borders_color);
     background-color: darken($c, 6%);
     box-shadow: inset 0 1px $shadow_color;
 
@@ -341,9 +347,7 @@
   //
     border-color: transparent;
     background-color: transparent;
-    background-image: none;
-
-    @include _shadows(inset 0 1px transparentize(white, 1), $_blank_edge);
+    box-shadow: none;
 
     text-shadow: none;
     -gtk-icon-shadow: none;
