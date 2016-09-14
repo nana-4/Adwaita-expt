@@ -482,7 +482,10 @@ button {
       }
     }
 
-    &.flat { &:backdrop, &:disabled, &:backdrop:disabled { @include button(undecorated); }}
+    &.flat {
+      &:disabled { @include button(undecorated-insensitive); }
+      &:backdrop { @include button(undecorated-backdrop); }
+    }
 
     &:disabled {
       @include button(insensitive);
@@ -524,10 +527,10 @@ button {
       @if $variant == 'light' { border-color: $selected_borders_color; }
 
       &.flat:not(:active):not(:checked):not(:hover):not(disabled) {
-        color: $selected_fg_color;
+        color: mix($selected_fg_color, $selected_bg_color, 70%);
         border-color: transparent;
 
-        &:backdrop { color: if($variant=='light', $backdrop_base_color, $backdrop_fg_color); }
+        &:backdrop { color: mix($selected_fg_color, $selected_bg_color, 35%); }
       }
     }
   }
@@ -2177,12 +2180,6 @@ notebook {
 
       // colors the button like the label, overridden otherwise
       button.flat {
-        color: $alt_fg_color;
-
-        &:hover { color: $fg_color; }
-
-        &:backdrop { color: $backdrop_alt_fg_color; }
-
         padding: 0;
         margin-top: 4px;
         margin-bottom: 4px;
@@ -3700,9 +3697,6 @@ placessidebar {
       padding: 0;
       border-radius: 100%;
       -gtk-outline-radius: 100%;
-
-      &:not(:hover):not(:active),
-      &:backdrop { > image { opacity: $_placesidebar_icons_opacity; }}
     }
 
     // in the sidebar case it makes no sense to click the selected row
