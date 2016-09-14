@@ -101,11 +101,9 @@ $button_transition: all 200ms $ease-out-quad;
   }
 
   &:selected {
-    &:focus, & {
-      @extend %selected_items;
+    @extend %selected_items;
 
-      border-radius: 3px;
-    }
+    border-radius: 3px;
   }
 }
 
@@ -114,7 +112,7 @@ textview {
   text {
     @extend %view;
 
-    selection { &:focus, & { @extend %selected_items; }}
+    selection { @extend %selected_items; }
   }
 }
 
@@ -343,13 +341,12 @@ entry {
 
    // linked entries
   .linked:not(.vertical) > & { @extend %linked; }
+
   .linked:not(.vertical) > &:focus + &,
-  .linked:not(.vertical) > &:focus + button,
-  .linked:not(.vertical) > &:focus + combobox > box > button.combo { border-left-color: entry_focus_border(); }
+  .linked:not(.vertical) > &:focus + button { border-left-color: entry_focus_border(); }
 
   .linked:not(.vertical) > &:drop(active) + &,
-  .linked:not(.vertical) > &:drop(active) + button,
-  .linked:not(.vertical) > &:drop(active) + combobox > box > button.combo { border-left-color: $drop_target_color; }
+  .linked:not(.vertical) > &:drop(active) + button { border-left-color: $drop_target_color; }
 
   // Vertically linked entries
   // FIXME: take care of "colored" entries
@@ -381,15 +378,13 @@ entry {
     &:focus:not(:only-child) {
       + %entry,
       + entry,
-      + button,
-      + combobox > box > button.combo { border-top-color: entry_focus_border(); }
+      + button { border-top-color: entry_focus_border(); }
     }
 
     &:drop(active):not(:only-child) {
       + %entry,
       + entry,
-      + button,
-      + combobox > box > button.combo { border-top-color: $drop_target_color; }
+      + button { border-top-color: $drop_target_color; }
     }
   }
 }
@@ -716,7 +711,6 @@ button {
       > label,
       > image { @extend %needs_attention; }
 
-      &:active,
       &:checked {
         > label,
         > image {
@@ -742,17 +736,9 @@ button {
 
   .primary-toolbar & { -gtk-icon-shadow: none; } // tango icons don't need shadows
 
-  .linked > &,
-  .linked > &:hover,
-  .linked > &:active,
-  .linked > &:checked,
-  .linked > &:backdrop { @extend %linked; }
+  .linked > & { @extend %linked; }
 
-  .linked.vertical > &,
-  .linked.vertical > &:hover,
-  .linked.vertical > &:active,
-  .linked.vertical > &:checked,
-  .linked.vertical > &:backdrop { @extend %linked_vertical; }
+  .linked.vertical > & { @extend %linked_vertical; }
 }
 
 %needs_attention {
@@ -1469,20 +1455,20 @@ headerbar {
         box-shadow: none;
         padding-left: 10px;
         padding-right: 10px;
+      }
 
-        GtkArrow { -GtkArrow-arrow-scaling: 1; }
+      GtkArrow { -GtkArrow-arrow-scaling: 1; }
 
-        .arrow {
-          -gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
-          color: transparentize($selected_fg_color,0.5);
-          -gtk-icon-shadow: none;
-        }
+      .arrow {
+        -gtk-icon-source: -gtk-icontheme('pan-down-symbolic');
+        color: transparentize($selected_fg_color,0.5);
+        -gtk-icon-shadow: none;
       }
     }
   }
 
   .tiled &,
-  .maximized & { &:backdrop, & { border-radius: 0; }} // squared corners when the window is maximized or tiled
+  .maximized & { border-radius: 0; } // squared corners when the window is maximized or tiled
 
   &.default-decoration {
     min-height: 28px;
@@ -1497,14 +1483,12 @@ headerbar {
   }
 
   .solid-csd & {
-    &:backdrop, & {
-      &:dir(rtl), &:dir(ltr) { // specificity bump
-        margin-left: -1px;
-        margin-right: -1px;
-        margin-top: -1px;
-        border-radius: 0;
-        box-shadow: none;
-      }
+    &:dir(rtl), &:dir(ltr) { // specificity bump
+      margin-left: -1px;
+      margin-right: -1px;
+      margin-top: -1px;
+      border-radius: 0;
+      box-shadow: none;
     }
   }
 }
@@ -1525,17 +1509,15 @@ headerbar {
 }
 
 .background:not(.tiled):not(.maximized) .titlebar {
-  &:backdrop, & {
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-  }
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 }
 
 headerbar {
   window:not(.tiled):not(.maximized) separator:first-child + &, // tackles the paned container case
-  window:not(.tiled):not(.maximized) &:first-child { &:backdrop, & { border-top-left-radius: 4px; }}
+  window:not(.tiled):not(.maximized) &:first-child { border-top-left-radius: 4px; }
 
-  window:not(.tiled):not(.maximized) &:last-child { &:backdrop, & { border-top-right-radius: 4px; }}
+  window:not(.tiled):not(.maximized) &:last-child { border-top-right-radius: 4px; }
 }
 
 .titlebar:not(headerbar) {
@@ -1604,16 +1586,12 @@ treeview.view {
   rubberband { @extend rubberband; } // to avoid borders being overridden by the previously set props
 
   &:selected {
-    &:focus, & {
-      border-radius: 0;
+    border-radius: 0;
 
-      @extend %selected_items;
-    }
+    @extend %selected_items;
 
-    &:backdrop, & {
-      border-left-color: mix($selected_fg_color, $selected_bg_color, 50%);
-      border-top-color: transparentize($fg_color, 0.9); // doesn't work unfortunatelly
-    }
+    border-left-color: mix($selected_fg_color, $selected_bg_color, 50%);
+    border-top-color: transparentize($fg_color, 0.9); // doesn't work unfortunatelly
   }
 
   &:disabled {
@@ -4254,7 +4232,6 @@ button.circular { // FIXME: aggregate to buttons
   }
 }
 
-*:drop(active):focus,
 *:drop(active) { // FIXME needs to be done widget by widget, this wildcard should really die
   border-color: $drop_target_color;
   box-shadow: inset 0 0 0 1px $drop_target_color;

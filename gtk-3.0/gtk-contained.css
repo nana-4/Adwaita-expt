@@ -64,10 +64,7 @@ textview text {
   textview text:backdrop {
     color: #323232;
     background-color: #fcfcfc; }
-  .view:selected:focus, iconview:selected:focus, .view:selected, iconview:selected,
-  .view text:selected:focus,
-  iconview text:selected:focus,
-  textview text:selected:focus,
+  .view:selected, iconview:selected,
   .view text:selected,
   iconview text:selected,
   textview text:selected {
@@ -316,18 +313,16 @@ entry progress {
   spinbutton:not(.vertical) progress:backdrop,
   entry progress:backdrop {
     background-color: transparent; }
-.linked:not(.vertical) > spinbutton:focus:not(.vertical) + spinbutton:not(.vertical), .linked:not(.vertical) > spinbutton:focus:not(.vertical) + button, .linked:not(.vertical) > spinbutton:focus:not(.vertical) + combobox > box > button.combo, .linked:not(.vertical) >
+.linked:not(.vertical) > spinbutton:focus:not(.vertical) + spinbutton:not(.vertical), .linked:not(.vertical) > spinbutton:focus:not(.vertical) + button, .linked:not(.vertical) >
 entry:focus + spinbutton:not(.vertical), .linked:not(.vertical) >
-entry:focus + button, .linked:not(.vertical) >
-entry:focus + combobox > box > button.combo, .linked:not(.vertical) > spinbutton:focus:not(.vertical) +
+entry:focus + button, .linked:not(.vertical) > spinbutton:focus:not(.vertical) +
 entry, .linked:not(.vertical) >
 entry:focus +
 entry {
   border-left-color: #4a90d9; }
-.linked:not(.vertical) > spinbutton:drop(active):not(.vertical) + spinbutton:not(.vertical), .linked:not(.vertical) > spinbutton:drop(active):not(.vertical) + button, .linked:not(.vertical) > spinbutton:drop(active):not(.vertical) + combobox > box > button.combo, .linked:not(.vertical) >
+.linked:not(.vertical) > spinbutton:drop(active):not(.vertical) + spinbutton:not(.vertical), .linked:not(.vertical) > spinbutton:drop(active):not(.vertical) + button, .linked:not(.vertical) >
 entry:drop(active) + spinbutton:not(.vertical), .linked:not(.vertical) >
-entry:drop(active) + button, .linked:not(.vertical) >
-entry:drop(active) + combobox > box > button.combo, .linked:not(.vertical) > spinbutton:drop(active):not(.vertical) +
+entry:drop(active) + button, .linked:not(.vertical) > spinbutton:drop(active):not(.vertical) +
 entry, .linked:not(.vertical) >
 entry:drop(active) +
 entry {
@@ -358,27 +353,21 @@ entry + entry:drop(active):not(:only-child) {
   border-top-color: #4e9a06; }
 .linked.vertical > spinbutton:focus:not(:only-child):not(.vertical) + spinbutton:not(.vertical),
 .linked.vertical > spinbutton:focus:not(:only-child):not(.vertical) + entry,
-.linked.vertical > spinbutton:focus:not(:only-child):not(.vertical) + button,
-.linked.vertical > spinbutton:focus:not(:only-child):not(.vertical) + combobox > box > button.combo, .linked.vertical >
+.linked.vertical > spinbutton:focus:not(:only-child):not(.vertical) + button, .linked.vertical >
 entry:focus:not(:only-child) + spinbutton:not(.vertical),
 .linked.vertical >
 entry:focus:not(:only-child) + entry,
 .linked.vertical >
-entry:focus:not(:only-child) + button,
-.linked.vertical >
-entry:focus:not(:only-child) + combobox > box > button.combo {
+entry:focus:not(:only-child) + button {
   border-top-color: #4a90d9; }
 .linked.vertical > spinbutton:drop(active):not(:only-child):not(.vertical) + spinbutton:not(.vertical),
 .linked.vertical > spinbutton:drop(active):not(:only-child):not(.vertical) + entry,
-.linked.vertical > spinbutton:drop(active):not(:only-child):not(.vertical) + button,
-.linked.vertical > spinbutton:drop(active):not(:only-child):not(.vertical) + combobox > box > button.combo, .linked.vertical >
+.linked.vertical > spinbutton:drop(active):not(:only-child):not(.vertical) + button, .linked.vertical >
 entry:drop(active):not(:only-child) + spinbutton:not(.vertical),
 .linked.vertical >
 entry:drop(active):not(:only-child) + entry,
 .linked.vertical >
-entry:drop(active):not(:only-child) + button,
-.linked.vertical >
-entry:drop(active):not(:only-child) + combobox > box > button.combo {
+entry:drop(active):not(:only-child) + button {
   border-top-color: #4e9a06; }
 
 treeview entry:focus:dir(rtl), treeview entry:focus:dir(ltr) {
@@ -1106,9 +1095,6 @@ button {
     padding-left: 2px;
     padding-right: 2px; }
   .stack-switcher >
-  button.needs-attention:active > label,
-  .stack-switcher >
-  button.needs-attention:active > image, .stack-switcher >
   button.needs-attention:checked > label,
   .stack-switcher >
   button.needs-attention:checked > image {
@@ -1213,11 +1199,7 @@ toolbar.inline-toolbar toolbutton:backdrop > button.flat, .linked:not(.vertical)
 entry, .inline-toolbar
 button, .inline-toolbar
 button:backdrop, .linked >
-button, .linked >
-button:hover, .linked >
-button:active, .linked >
-button:checked, .linked >
-button:backdrop, .linked > combobox > box > button.combo:dir(ltr), .linked > combobox > box > button.combo:dir(rtl) {
+button, .linked > combobox > box > button.combo:dir(ltr), .linked > combobox > box > button.combo:dir(rtl) {
   border-radius: 0;
   border-right-style: none; }
 
@@ -1246,11 +1228,7 @@ toolbar.inline-toolbar toolbutton:backdrop:only-child > button.flat, .linked:not
 
 .linked.vertical > spinbutton:not(.vertical), .linked.vertical >
 entry, .linked.vertical >
-button, .linked.vertical >
-button:hover, .linked.vertical >
-button:active, .linked.vertical >
-button:checked, .linked.vertical >
-button:backdrop, .linked.vertical > combobox > box > button.combo {
+button, .linked.vertical > combobox > box > button.combo {
   border-style: solid solid none solid;
   border-radius: 0; }
 
@@ -1895,20 +1873,16 @@ headerbar {
       box-shadow: none;
       padding-left: 10px;
       padding-right: 10px; }
-      .selection-mode.titlebar:not(headerbar) .selection-menu:backdrop GtkArrow, .selection-mode.titlebar:not(headerbar) .selection-menu GtkArrow,
-      headerbar.selection-mode .selection-menu:backdrop GtkArrow,
-      headerbar.selection-mode .selection-menu GtkArrow {
-        -GtkArrow-arrow-scaling: 1; }
-      .selection-mode.titlebar:not(headerbar) .selection-menu:backdrop .arrow, .selection-mode.titlebar:not(headerbar) .selection-menu .arrow,
-      headerbar.selection-mode .selection-menu:backdrop .arrow,
-      headerbar.selection-mode .selection-menu .arrow {
-        -gtk-icon-source: -gtk-icontheme("pan-down-symbolic");
-        color: rgba(255, 255, 255, 0.5);
-        -gtk-icon-shadow: none; }
-  .tiled .titlebar:backdrop:not(headerbar), .tiled .titlebar:not(headerbar), .maximized .titlebar:backdrop:not(headerbar), .maximized .titlebar:not(headerbar), .tiled
-  headerbar:backdrop, .tiled
+    .selection-mode.titlebar:not(headerbar) .selection-menu GtkArrow,
+    headerbar.selection-mode .selection-menu GtkArrow {
+      -GtkArrow-arrow-scaling: 1; }
+    .selection-mode.titlebar:not(headerbar) .selection-menu .arrow,
+    headerbar.selection-mode .selection-menu .arrow {
+      -gtk-icon-source: -gtk-icontheme("pan-down-symbolic");
+      color: rgba(255, 255, 255, 0.5);
+      -gtk-icon-shadow: none; }
+  .tiled .titlebar:not(headerbar), .maximized .titlebar:not(headerbar), .tiled
   headerbar, .maximized
-  headerbar:backdrop, .maximized
   headerbar {
     border-radius: 0; }
   .default-decoration.titlebar:not(headerbar),
@@ -1921,9 +1895,7 @@ headerbar {
       min-width: 26px;
       margin: 0;
       padding: 0; }
-  .solid-csd .titlebar:backdrop:dir(rtl):not(headerbar), .solid-csd .titlebar:backdrop:dir(ltr):not(headerbar), .solid-csd .titlebar:dir(rtl):not(headerbar), .solid-csd .titlebar:dir(ltr):not(headerbar), .solid-csd
-  headerbar:backdrop:dir(rtl), .solid-csd
-  headerbar:backdrop:dir(ltr), .solid-csd
+  .solid-csd .titlebar:dir(rtl):not(headerbar), .solid-csd .titlebar:dir(ltr):not(headerbar), .solid-csd
   headerbar:dir(rtl), .solid-csd
   headerbar:dir(ltr) {
     margin-left: -1px;
@@ -1942,13 +1914,13 @@ headerbar switch {
   margin-top: 9px;
   margin-bottom: 9px; }
 
-.background:not(.tiled):not(.maximized) .titlebar:backdrop, .background:not(.tiled):not(.maximized) .titlebar {
+.background:not(.tiled):not(.maximized) .titlebar {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px; }
 
-window:not(.tiled):not(.maximized) separator:first-child + headerbar:backdrop, window:not(.tiled):not(.maximized) separator:first-child + headerbar, window:not(.tiled):not(.maximized) headerbar:first-child:backdrop, window:not(.tiled):not(.maximized) headerbar:first-child {
+window:not(.tiled):not(.maximized) separator:first-child + headerbar, window:not(.tiled):not(.maximized) headerbar:first-child {
   border-top-left-radius: 4px; }
-window:not(.tiled):not(.maximized) headerbar:last-child:backdrop, window:not(.tiled):not(.maximized) headerbar:last-child {
+window:not(.tiled):not(.maximized) headerbar:last-child {
   border-top-right-radius: 4px; }
 
 window.csd > .titlebar:not(headerbar) {
@@ -1994,9 +1966,8 @@ treeview.view {
     -GtkTreeView-tree-line-width: 1;
     -GtkTreeView-tree-line-pattern: '';
     -GtkTreeView-expander-size: 16; }
-  treeview.view:selected:focus, treeview.view:selected {
-    border-radius: 0; }
-  treeview.view:selected:backdrop, treeview.view:selected {
+  treeview.view:selected {
+    border-radius: 0;
     border-left-color: #a5c8ec;
     border-top-color: rgba(46, 52, 54, 0.1); }
   treeview.view:disabled {
@@ -4355,46 +4326,34 @@ headerbar.selection-mode button.titlebutton,
   .titlebar.selection-mode button.titlebutton:backdrop {
     -gtk-icon-shadow: none; }
 
-.view:selected:focus, iconview:selected:focus, .view:selected, iconview:selected,
-.view text:selected:focus,
-iconview text:selected:focus,
-textview text:selected:focus,
+.view:selected, iconview:selected,
 .view text:selected,
 iconview text:selected,
-textview text:selected, .view text selection:focus, iconview text selection:focus, .view text selection, iconview text selection,
-textview text selection:focus,
+textview text:selected, .view text selection, iconview text selection,
 textview text selection, flowbox flowboxchild:selected, spinbutton:not(.vertical) selection,
 entry selection, modelbutton.flat:selected,
-.menuitem.button.flat:selected, treeview.view:selected:focus, treeview.view:selected, row:selected, calendar:selected {
+.menuitem.button.flat:selected, treeview.view:selected, row:selected, calendar:selected {
   background-color: #4a90d9; }
-  row:selected label, label:selected, .selection-mode button.titlebutton, .view:selected:focus, iconview:selected:focus, .view:selected, iconview:selected,
-  .view text:selected:focus,
-  iconview text:selected:focus,
-  textview text:selected:focus,
+  row:selected label, label:selected, .selection-mode button.titlebutton, .view:selected, iconview:selected,
   .view text:selected,
   iconview text:selected,
-  textview text:selected, .view text selection:focus, iconview text selection:focus, .view text selection, iconview text selection,
-  textview text selection:focus,
+  textview text:selected, .view text selection, iconview text selection,
   textview text selection, flowbox flowboxchild:selected, spinbutton:not(.vertical) selection,
   entry selection, modelbutton.flat:selected,
-  .menuitem.button.flat:selected, treeview.view:selected:focus, treeview.view:selected, row:selected, calendar:selected {
+  .menuitem.button.flat:selected, treeview.view:selected, row:selected, calendar:selected {
     color: #ffffff; }
-    row:selected label:disabled, label:disabled:selected, .selection-mode button.titlebutton:disabled, iconview:disabled:selected:focus, .view:disabled:selected, iconview:disabled:selected,
-    iconview text:disabled:selected:focus,
-    textview text:disabled:selected:focus,
+    row:selected label:disabled, label:disabled:selected, .selection-mode button.titlebutton:disabled, .view:disabled:selected, iconview:disabled:selected,
     .view text:disabled:selected,
     iconview text:disabled:selected,
-    textview text:disabled:selected, iconview text selection:disabled:focus, .view text selection:disabled, iconview text selection:disabled,
+    textview text:disabled:selected, .view text selection:disabled, iconview text selection:disabled,
     textview text selection:disabled, flowbox flowboxchild:disabled:selected, label:disabled selection, spinbutton:not(.vertical) selection:disabled,
     entry selection:disabled, modelbutton.flat:disabled:selected,
     .menuitem.button.flat:disabled:selected, row:disabled:selected, calendar:disabled:selected {
       color: #a5c8ec; }
-    row:selected label:backdrop, label:backdrop:selected, .selection-mode button.titlebutton:backdrop, iconview:backdrop:selected:focus, .view:backdrop:selected, iconview:backdrop:selected,
-    iconview text:backdrop:selected:focus,
-    textview text:backdrop:selected:focus,
+    row:selected label:backdrop, label:backdrop:selected, .selection-mode button.titlebutton:backdrop, .view:backdrop:selected, iconview:backdrop:selected,
     .view text:backdrop:selected,
     iconview text:backdrop:selected,
-    textview text:backdrop:selected, iconview text selection:backdrop:focus, .view text selection:backdrop, iconview text selection:backdrop,
+    textview text:backdrop:selected, .view text selection:backdrop, iconview text selection:backdrop,
     textview text selection:backdrop, flowbox flowboxchild:backdrop:selected, label:backdrop selection, spinbutton:not(.vertical) selection:backdrop,
     entry selection:backdrop, modelbutton.flat:backdrop:selected,
     .menuitem.button.flat:backdrop:selected, row:backdrop:selected, calendar:backdrop:selected {
@@ -4472,7 +4431,6 @@ button.circular {
     color: #8b8e8f;
     transition: 200ms ease-out; }
 
-*:drop(active):focus,
 *:drop(active) {
   border-color: #4e9a06;
   box-shadow: inset 0 0 0 1px #4e9a06;
