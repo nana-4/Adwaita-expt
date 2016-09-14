@@ -2096,7 +2096,7 @@ menubar,
     padding: 4px 8px; }
     menubar > menuitem:hover,
     .menubar > menuitem:hover {
-      box-shadow: inset 0 -3px #4a90d9;
+      box-shadow: inset 0 -2px #4a90d9;
       color: #2a76c6; }
     menubar > menuitem:disabled,
     .menubar > menuitem:disabled {
@@ -2264,41 +2264,41 @@ notebook > header {
     notebook > header.top > tabs {
       margin-bottom: -2px; }
       notebook > header.top > tabs > tab:hover {
-        box-shadow: inset 0 -3px #b6b6b3; }
+        box-shadow: inset 0 -2px #b6b6b3; }
       notebook > header.top > tabs > tab:backdrop {
         box-shadow: none; }
       notebook > header.top > tabs > tab:checked {
-        box-shadow: inset 0 -3px #4a90d9; }
+        box-shadow: inset 0 -2px #4a90d9; }
   notebook > header.bottom {
     border-top-style: solid; }
     notebook > header.bottom > tabs {
       margin-top: -2px; }
       notebook > header.bottom > tabs > tab:hover {
-        box-shadow: inset 0 3px #b6b6b3; }
+        box-shadow: inset 0 2px #b6b6b3; }
       notebook > header.bottom > tabs > tab:backdrop {
         box-shadow: none; }
       notebook > header.bottom > tabs > tab:checked {
-        box-shadow: inset 0 3px #4a90d9; }
+        box-shadow: inset 0 2px #4a90d9; }
   notebook > header.left {
     border-right-style: solid; }
     notebook > header.left > tabs {
       margin-right: -2px; }
       notebook > header.left > tabs > tab:hover {
-        box-shadow: inset -3px 0 #b6b6b3; }
+        box-shadow: inset -2px 0 #b6b6b3; }
       notebook > header.left > tabs > tab:backdrop {
         box-shadow: none; }
       notebook > header.left > tabs > tab:checked {
-        box-shadow: inset -3px 0 #4a90d9; }
+        box-shadow: inset -2px 0 #4a90d9; }
   notebook > header.right {
     border-left-style: solid; }
     notebook > header.right > tabs {
       margin-left: -2px; }
       notebook > header.right > tabs > tab:hover {
-        box-shadow: inset 3px 0 #b6b6b3; }
+        box-shadow: inset 2px 0 #b6b6b3; }
       notebook > header.right > tabs > tab:backdrop {
         box-shadow: none; }
       notebook > header.right > tabs > tab:checked {
-        box-shadow: inset 3px 0 #4a90d9; }
+        box-shadow: inset 2px 0 #4a90d9; }
   notebook > header.top > tabs > arrow {
     border-top-style: none; }
   notebook > header.bottom > tabs > arrow {
