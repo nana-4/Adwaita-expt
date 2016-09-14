@@ -1295,8 +1295,7 @@ searchbar,
 %darkbar {
   border-style: solid;
   border-color: $borders_color;
-  $_bg: mix($bg_color, $borders_color, 70%);
-  background-color: $_bg;
+  background-color: $dark_fill;
   transition: $button_transition;
 
   &:backdrop {
@@ -2125,7 +2124,7 @@ notebook {
 
         &.reorderable-page {
           border-color: $borders_color;
-          background-color: transparentize($bg_color, 0.5);
+          background-color: $bg_color;
         }
       }
 
@@ -2143,7 +2142,7 @@ notebook {
         color: $fg_color;
         &.reorderable-page {
           border-color: $borders_color;
-          background-color: $bg_color;
+          background-color: $headerbar_color;
         }
       }
 
@@ -2407,11 +2406,10 @@ switch {
   outline-offset: -4px;
 
   // similar to the .scale
-  border: 1px solid $borders_color;
+  border: 1px solid;
   border-radius: 3px;
-  color: $fg_color;
-  background-color: $dark_fill;
-  text-shadow: 0 1px transparentize(black, 0.9);
+
+  @include button(active);
 
   &:checked {
     color: $selected_fg_color;
@@ -2421,19 +2419,12 @@ switch {
                  0 0 2px transparentize(white, 0.4);
   }
 
-  &:disabled {
-    color: $insensitive_fg_color;
-    border-color: $borders_color;
-    background-color: $insensitive_bg_color;
-    text-shadow: none;
-  }
+  &:disabled { @include button(insensitive-active); }
 
   &:backdrop {
-    color: $backdrop_fg_color;
-    border-color: $backdrop_borders_color;
-    background-color: $backdrop_dark_fill;
-    text-shadow: none;
     transition: $backdrop_transition;
+
+    @include button(backdrop-active);
 
     &:checked {
       @if $variant == 'light' { color: $backdrop_bg_color; }
@@ -2655,15 +2646,16 @@ treeview.view radio:selected { &:focus, & { @extend %radio; }} // This is a work
  * GtkScale *
  ************/
 %scale_trough {
-  border: 1px solid $borders_color;
+  border: 1px solid;
   border-radius: 3px;
-  background-color: $dark_fill;
 
-  &:disabled { background-color: $insensitive_bg_color; }
+  @include button(active);
+
+  &:disabled { @include button(insensitive-active); }
 
   &:backdrop {
-    background-color: $backdrop_dark_fill;
-    border-color: $backdrop_borders_color;
+    @include button(backdrop-active);
+
     transition: $backdrop_transition;
 
     &:disabled { background-color: $insensitive_bg_color; }
