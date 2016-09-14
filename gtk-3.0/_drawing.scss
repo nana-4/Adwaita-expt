@@ -362,14 +362,8 @@
 // $hc: top highlight color
 // $ov: a background layer for background shorthand (hence no commas!)
 //
-  $gradient: linear-gradient(to top, darken($c, 13%), darken($c, 2%) 2px, $c 3px);
-
-  @if $variant == 'dark' { $gradient: linear-gradient(to top, darken($c, 3%), darken($c, 1%) 2px, $c 3px); }
-
-  @if $ov != none { background: $c $ov, $gradient; }
-  @else { background: $c $gradient; }
-
-  box-shadow: inset 0 1px $hc; // top highlight
+  background-color: $c;
+  box-shadow: inset 0 1px _button_hilight_color($c), inset 0 -1px $shadow_color;
 }
 
 @mixin overshoot($p, $t:normal, $c:$fg_color) {
