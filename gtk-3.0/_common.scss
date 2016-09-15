@@ -204,8 +204,8 @@ assistant {
   border: none;
   background-color: $osd_bg_color;
   background-clip: padding-box;
-  text-shadow: 0 1px black;
-  -gtk-icon-shadow: 0 1px black;
+
+  @include _button_text_shadow($osd_fg_color, $osd_bg_color);
 
   &:backdrop {
     text-shadow: none;
@@ -342,6 +342,9 @@ entry {
    // linked entries
   .linked:not(.vertical) > & { @extend %linked; }
 
+  spinbutton.vertical > &:not(:focus),
+  .linked.vertical > &:not(:first-child):not(:focus) { box-shadow: none; }
+
   .linked:not(.vertical) > &:focus + &,
   .linked:not(.vertical) > &:focus + button { border-left-color: entry_focus_border(); }
 
@@ -459,21 +462,19 @@ button {
     }
 
     &:backdrop {
-      &.flat, & {
-        @include button(backdrop);
+      @include button(backdrop);
 
-        transition: $backdrop_transition;
-        -gtk-icon-effect: none;
+      transition: $backdrop_transition;
+      -gtk-icon-effect: none;
+
+      &:active,
+      &:checked { @include button(backdrop-active); }
+
+      &:disabled {
+        @include button(backdrop-insensitive);
 
         &:active,
-        &:checked { @include button(backdrop-active); }
-
-        &:disabled {
-          @include button(backdrop-insensitive);
-
-          &:active,
-          &:checked { @include button(backdrop-insensitive-active); }
-        }
+        &:checked { @include button(backdrop-insensitive-active); }
       }
     }
 
@@ -594,8 +595,8 @@ button {
       @include button(undecorated, $osd_bg_color, $osd_fg_color);
 
       box-shadow: none; //FIXME respect no edge on the button mixin
-      text-shadow: 0 1px black;
-      -gtk-icon-shadow: 0 1px black;
+
+      @include _button_text_shadow($osd_fg_color, $osd_bg_color);
 
       &:hover { @include button(hover, $osd_bg_color, $osd_fg_color); }
 
@@ -883,7 +884,7 @@ modelbutton.flat,
   min-height: 26px;
   padding-left: 5px;
   padding-right: 5px;
-  border-radius: 3px;
+  border-radius: 2px;
   outline-offset: -2px;
 
   @extend %undecorated_button;
@@ -1017,10 +1018,10 @@ spinbutton {
       margin: 0;
       padding-bottom: 0;
       padding-top: 0;
-      color: mix($fg_color, $base_color, 90%);
-      background-image: none;
+      color: $alt_fg_color;
+      background-color: transparent;
       border-style: none none none solid;
-      border-color: transparentize($borders_color, 0.7);
+      border-color: $separator_color;
       border-radius: 0;
       box-shadow: none;
 
@@ -1032,11 +1033,12 @@ spinbutton {
       }
 
       &:disabled {
-        color: transparentize($insensitive_fg_color, 0.7);
+        color: $insensitive_alt_fg_color;
         background-color: transparent;
       }
 
       &:active {
+        color: $fg_color;
         background-color: transparentize(black, 0.9);
         box-shadow: inset 0 2px 3px -1px transparentize(black, 0.8);
       }
@@ -1341,7 +1343,8 @@ headerbar {
 
     color: $selected_fg_color;
     border-color: $selected_borders_color;
-    text-shadow: 0 -1px transparentize(black, 0.5);
+
+    @include _button_text_shadow($selected_fg_color, $selected_bg_color);
 
     @include headerbar_fill($selected_bg_color, $_hc);
 
@@ -1571,7 +1574,7 @@ treeview.view {
    }
 
   border-left-color: mix($fg_color, $base_color, 50%); // this is actually the tree lines color,
-  border-top-color: $bg_color;                         // while this is the grid lines color, better then nothing
+  border-top-color: transparentize($fg_color, 0.9);                         // while this is the grid lines color, better then nothing
 
   rubberband { @extend rubberband; } // to avoid borders being overridden by the previously set props
 
@@ -1597,14 +1600,14 @@ treeview.view {
 
   &.separator {
     min-height: 2px;
-    color: $bg_color;
+    color: transparentize($fg_color, 0.9);
 
-    &:backdrop { color: transparentize($bg_color, 0.9); }
+    &:backdrop { color: transparentize($fg_color, 0.9); }
   }
 
   &:backdrop {
     border-left-color: mix($backdrop_fg_color, $backdrop_bg_color, 50%);
-    border-top: $backdrop_bg_color;
+    border-top: transparentize($fg_color, 0.9);
   }
   &:drop(active) {
     border-style: solid none;
@@ -1705,33 +1708,27 @@ treeview.view {
 
   header {
     button {
-      $_column_header_color: mix($fg_color, $base_color, 50%);
-
       @extend %column_header_button;
 
-      color: $_column_header_color;
+      color: $alt_fg_color;
       background-color: $base_color;
       font-weight: bold;
       text-shadow: none;
       box-shadow: none;
 
       &:hover {
-        @extend %column_header_button;
-
-        color: mix($_column_header_color, $fg_color, 50%);
+        color: $fg_color;
         box-shadow: none;
         transition: none; //I shouldn't need this
       }
 
       &:active {
-        @extend %column_header_button;
-
         color: $fg_color;
         transition: none; //I shouldn't need this
       }
     }
 
-    button:last-child { &:backdrop, & { border-right-style: none; }}
+    button:last-child { border-right-style: none; }
   }
 
   button.dnd,
@@ -1756,24 +1753,24 @@ treeview.view {
   padding: 0 6px;
   background-image: none;
   border-style: none solid solid none;
-  border-color: $bg_color;
+  border-color: transparentize($fg_color, 0.9);
   border-radius: 0;
   text-shadow: none;
 
   &:disabled {
-    border-color: $bg_color;
+    border-color: transparentize($fg_color, 0.9);
     background-image: none;
   }
 
   &:backdrop {
     color: mix($backdrop_fg_color, $backdrop_bg_color, 50%);
-    border-color: $backdrop_bg_color;
+    border-color: transparentize($fg_color, 0.9);
     border-style: none solid solid none;
     background-image: none;
     background-color: $backdrop_base_color;
 
     &:disabled {
-      border-color: $backdrop_bg_color;
+      border-color: transparentize($fg_color, 0.9);
       background-image: none;
     }
   }
@@ -1787,7 +1784,7 @@ menubar,
 .menubar {
   -GtkWidget-window-dragging: true;
   padding: 0px;
-  box-shadow: inset 0 -1px transparentize(black, 0.9);
+  box-shadow: inset 0 -1px $separator_color;
 
   &:backdrop { background-color: $backdrop_bg_color; }
 
@@ -2403,8 +2400,7 @@ switch {
     color: $selected_fg_color;
     border-color: $selected_borders_color;
     background-color: $selected_bg_color;
-    text-shadow: 0 1px transparentize($selected_borders_color, 0.5),
-                 0 0 2px transparentize(white, 0.4);
+    text-shadow: 0 0 2px transparentize(white, 0.4);
   }
 
   &:disabled { @include button(insensitive-active); }
@@ -2610,21 +2606,26 @@ menu menuitem {
 
 treeview.view check,
 treeview.view radio {
-  &:selected {
-    &:focus, & {
-      color: $fg_color;
+  &:selected, & {
+  @include button(normal);
 
-      @if $variant == 'light' { border-color: $selected_borders_color; }
-    }
+  &:hover { @include button(hover); }
+  &:active { @include button(active); }
+  &:disabled { @include button(insensitive); }
+  &:backdrop {
+    @include button(backdrop);
 
-    &:disabled {
-      color: $insensitive_fg_color;
+    transition: $backdrop_transition;
 
-      &:backdrop { color: $backdrop_insensitive_color; }
-    }
+    &:disabled { @include button(backdrop-insensitive); }
+  }
   }
 
-  &:backdrop { &:selected, & { color: $backdrop_fg_color; }}
+  &:selected {
+    &:backdrop, &:disabled, &:active, &:hover, & {
+      @if $variant == 'light' { border-color: $selected_borders_color; }
+    }
+  }
 }
 
 treeview.view radio:selected { &:focus, & { @extend %radio; }} // This is a workaround
@@ -2776,12 +2777,12 @@ scale {
   }
 
   slider {
-    @include button(normal);
-
     border: 1px solid;
     border-radius: 100%;
     transition: $button_transition;
     transition-property: background, border, box-shadow;
+
+    @include button(normal);
 
     &:hover { @include button(hover); }
 
@@ -3328,7 +3329,7 @@ scrolledwindow {
 
 //vbox and hbox separators
 separator {
-  background: transparentize(black, 0.9);
+  background: $separator_color;
   min-width: 1px;
   min-height: 1px;
 }
@@ -3434,9 +3435,9 @@ calendar {
   }
 
   &.header {
-    border-bottom-color: transparentize(black, 0.9);
+    border-bottom-color: $separator_color;
 
-    &:backdrop { border-bottom-color: transparentize(black, 0.9); }
+    &:backdrop { border-bottom-color: $separator_color; }
   }
 
   &.button {
@@ -3772,7 +3773,7 @@ infobar {
       border-color: darken($selected_bg_color, 10%);
     }
 
-    text-shadow: 0 1px darken($selected_bg_color, 10%);
+    @include _button_text_shadow($selected_fg_color, $selected_bg_color);
 
     &:backdrop { text-shadow: none; }
 
@@ -3823,7 +3824,8 @@ tooltip {
   padding: 4px; /* not working */
   border-radius: 5px;
   box-shadow: none; // otherwise it gets inherited by windowframe.csd
-  text-shadow: 0 1px black;
+
+  @include _button_text_shadow($osd_fg_color, $osd_bg_color);
 
   // FIXME: we need a border or tooltips vanish on black background.
   decoration { background-color: transparent; }

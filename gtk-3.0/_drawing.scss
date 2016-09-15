@@ -2,12 +2,6 @@
 
 // generic drawing of more complex things
 
-@function _widget_edge($c:$borders_edge) {
-// outer highlight "used" on most widgets
-  @if $c == none { @return none; }
-  @else { @return 0 1px $c; }
-}
-
 @mixin _shadows($list...) {
 //
 // Helper mixin to stack up to box-shadows;
@@ -42,9 +36,6 @@
 // normal, focus, insensitive, backdrop, backdrop-insensitive, osd, osd-focus, osd-backdrop;
 //
 
-  $_blank_edge: if($edge == none, none, 0 1px transparentize($edge, 1));
-  $_entry_edge: if($edge == none, none, _widget_edge($edge));
-
   @if $t==normal {
     color: $text_color;
     border-color: $borders_color;
@@ -52,26 +43,26 @@
     box-shadow: inset 0 1px $shadow_color;
   }
   @if $t==focus {
-    @include _shadows(entry_focus_shadow($fc), $_entry_edge);
+    @include _shadows(entry_focus_shadow($fc));
     border-color: entry_focus_border($fc);
   }
   @if $t==insensitive {
     color: $insensitive_fg_color;
     border-color: $borders_color;
     background-color: $insensitive_bg_color;
-    box-shadow: $_entry_edge;
+    box-shadow: none;
   }
   @if $t==backdrop {
     color: $backdrop_text_color;
     border-color: $backdrop_borders_color;
     background-color: $backdrop_base_color;
-    box-shadow: $_blank_edge;
+    box-shadow: none;
   }
   @if $t==backdrop-insensitive {
     color: $backdrop_insensitive_color;
     border-color: $backdrop_borders_color;
     background-color: $insensitive_bg_color;
-    box-shadow: $_blank_edge;
+    box-shadow: none;
   }
   @if $t==osd {
     color: $osd_text_color;
@@ -118,16 +109,15 @@
   @else { @return darken($c, 20%); }
 }
 
-@function _text_shadow_color ($tc: $fg_color, $bg: $bg_color) {
+@function _text_shadow_color($tc: $fg_color, $bg: $bg_color) {
 //
 // calculate the color of text shadows
 //
 // $tc is the text color
 // $bg is the background color
 //
-  $_lbg: lightness($bg)/100%;
-  @if lightness($tc)<50% { @return transparentize(white, 1-$_lbg/($_lbg*1.3)); }
-  @else { @return transparentize(black, $_lbg*0.8); }
+  @if lightness($tc)<50% { @return rgba(white, 0.8); }
+  @else { @return rgba(black, 0.4); }
 }
 
 @function _button_hilight_color($c) {
@@ -137,14 +127,14 @@
 // $c: base color;
 //
   @if lightness($c)>95% { @return white; }
-  @else if lightness($c)>90% { @return transparentize(white, 0.2); }
-  @else if lightness($c)>80% { @return transparentize(white, 0.4); }
-  @else if lightness($c)>50% { @return transparentize(white, 0.6); }
-  @else if lightness($c)>40% { @return transparentize(white, 0.8); }
-  @else { @return transparentize(white, 0.95); }
+  @else if lightness($c)>90% { @return rgba(white, 0.4); }
+  @else if lightness($c)>80% { @return rgba(white, 0.3); }
+  @else if lightness($c)>50% { @return rgba(white, 0.2); }
+  @else if lightness($c)>40% { @return rgba(white, 0.1); }
+  @else { @return rgba(white, 0.05); }
 }
 
-@mixin _button_text_shadow ($tc:$fg_color, $bg:$bg_color) {
+@mixin _button_text_shadow($tc:$fg_color, $bg:$bg_color) {
 //
 // helper function for the text emboss effect
 //
@@ -182,8 +172,6 @@
 //
 
   $_hilight_color: _button_hilight_color($c);
-  $_button_edge: if($edge == none, none, _widget_edge($edge));
-  $_blank_edge: if($edge == none, none, _widget_edge(transparentize($edge,1)));
 
   @if $t==normal {
     color: $tc;
