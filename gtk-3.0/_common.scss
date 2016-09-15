@@ -1040,7 +1040,6 @@ spinbutton {
       &:active {
         color: $fg_color;
         background-color: transparentize(black, 0.9);
-        box-shadow: inset 0 2px 3px -1px transparentize(black, 0.8);
       }
 
       &:backdrop {

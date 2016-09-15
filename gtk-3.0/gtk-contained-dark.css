@@ -1364,8 +1364,7 @@ spinbutton:not(.vertical) {
       background-color: transparent; }
     spinbutton:not(.vertical) button:active {
       color: #eeeeec;
-      background-color: rgba(0, 0, 0, 0.1);
-      box-shadow: inset 0 2px 3px -1px rgba(0, 0, 0, 0.2); }
+      background-color: rgba(0, 0, 0, 0.1); }
     spinbutton:not(.vertical) button:backdrop {
       color: rgba(188, 189, 188, 0.55);
       background-color: transparent;
