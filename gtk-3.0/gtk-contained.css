@@ -1496,9 +1496,9 @@ toolbar {
   .osd toolbar {
     background-color: transparent; }
   toolbar.osd {
-    padding: 13px;
+    padding: 6px;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     background-color: rgba(28, 31, 32, 0.7); }
     toolbar.osd.left, toolbar.osd.right, toolbar.osd.top, toolbar.osd.bottom {
       border-radius: 0; }
@@ -3796,8 +3796,9 @@ row {
  *********************/
 .app-notification,
 .app-notification.frame {
-  padding: 10px;
-  border-radius: 0 0 5px 5px;
+  margin: 6px;
+  padding: 6px;
+  border-radius: 4px;
   background-color: rgba(28, 31, 32, 0.7);
   background-clip: padding-box; }
   .app-notification:backdrop,
@@ -4106,7 +4107,7 @@ infobar {
 tooltip {
   padding: 4px;
   /* not working */
-  border-radius: 5px;
+  border-radius: 4px;
   box-shadow: none;
   text-shadow: 0 -1px rgba(0, 0, 0, 0.4);
   -gtk-icon-shadow: 0 -1px rgba(0, 0, 0, 0.4); }
@@ -4117,7 +4118,7 @@ tooltip {
   tooltip decoration {
     background-color: transparent; }
   tooltip * {
-    padding: 4px;
+    padding: 1px;
     background-color: transparent;
     color: white; }
 

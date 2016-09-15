@@ -1236,9 +1236,9 @@ toolbar {
 
   // stand-alone OSD toolbars
   &.osd {
-    padding: 13px;
+    padding: 6px;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     background-color: $osd_bg_color;
 
     &.left,
@@ -3391,8 +3391,9 @@ row {
 .app-notification.frame {
   @extend %osd;
 
-  padding: 10px;
-  border-radius: 0 0 5px 5px;
+  margin: 6px;
+  padding: 6px;
+  border-radius: 4px;
   background-color: $osd_bg_color;
   background-clip: padding-box;
 
@@ -3825,7 +3826,7 @@ tooltip {
   }
 
   padding: 4px; /* not working */
-  border-radius: 5px;
+  border-radius: 4px;
   box-shadow: none; // otherwise it gets inherited by windowframe.csd
 
   @include _button_text_shadow($osd_fg_color, $osd_bg_color);
@@ -3834,7 +3835,7 @@ tooltip {
   decoration { background-color: transparent; }
 
   * { // Yeah this is ugly
-    padding: 4px;
+    padding: 1px;
     background-color: transparent;
     color: white;
   }
