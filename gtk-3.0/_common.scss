@@ -3188,6 +3188,10 @@ levelbar {
 
   &.vertical.discrete block { margin: 1px 0; }
 
+  &.horizontal.discrete trough { padding: 2px 1px; }
+
+  &.vertical.discrete trough { padding: 1px 2px; }
+
   block {
     border: 1px solid;
     border-radius: 1px;
