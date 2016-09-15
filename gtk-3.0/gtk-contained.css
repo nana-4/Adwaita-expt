@@ -2379,14 +2379,14 @@ scrollbar {
     background-color: transparent; }
     scrollbar.overlay-indicator:not(.dragging):not(.hovering) slider {
       margin: 2px;
-      min-width: 4px;
-      min-height: 4px;
+      min-width: 3px;
+      min-height: 3px;
       background-color: #2e3436;
       border: 1px solid white; }
     scrollbar.overlay-indicator:not(.dragging):not(.hovering) button {
       margin: 2px;
-      min-width: 4px;
-      min-height: 4px;
+      min-width: 3px;
+      min-height: 3px;
       background-color: #2e3436;
       background-clip: padding-box;
       border-radius: 100%;
