@@ -31,7 +31,7 @@
   }
   @if $t==focus {
     border-color: entry_focus_border($fc);
-    box-shadow: _shadows(entry_focus_shadow($fc));
+    box-shadow: entry_focus_shadow($fc);
   }
   @if $t==insensitive {
     color: $insensitive_fg_color;
