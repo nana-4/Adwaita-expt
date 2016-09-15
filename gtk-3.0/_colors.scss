@@ -48,8 +48,8 @@ $separator_color: transparentize(black, 0.9);
 $drop_target_color: #4e9a06;
 
 //insensitive state derived colors
-$insensitive_fg_color: rgba($fg_color, 0.3);
-$insensitive_alt_fg_color: rgba($fg_color, 0.3 * 0.7);
+$insensitive_fg_color: rgba($fg_color, 0.4);
+$insensitive_alt_fg_color: rgba($fg_color, 0.4 * 0.7);
 $insensitive_bg_color: mix($bg_color, $base_color, 60%);
 $insensitive_borders_color: $borders_color;
 
