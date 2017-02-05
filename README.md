@@ -1,10 +1,11 @@
-Experimental Adwaita with various bug fixes and improvements. (**WIP**)
+An experimental Adwaita for technical purposes.
 
-#### Noteworthy changes
-* More modern look and feel with slightly flattening.
-* Represents the three-dimensional effect with `box-shadow` instead of `background-image`.
-* Consistency text coloring.
-* Animates overlay scrollbars.
+#### Key changes from the original Adwaita
+* A bit more modern look and feel with slight flattening.
+* Represent the three-dimensional effect with `box-shadow` instead of `background-image`.
+* Make text coloring consistent.
+* Animate overlay scrollbars on hovering.
+* Code cleanups.
 
 #### License
 LGPL
